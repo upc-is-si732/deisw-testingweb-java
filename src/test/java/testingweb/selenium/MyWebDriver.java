@@ -10,7 +10,7 @@ public class MyWebDriver {
   public static WebDriver getWebDriver() {
     if (webDriver == null)  {
       // For Win
-      String pathDriver = System.getProperty("user.dir") + "\\driver\\chromedriver_114.exe";
+      String pathDriver = System.getProperty("user.dir") + "\\driver\\chromedriver_117.exe";
       // for Mac
       // String pathDriver = System.getProperty("user.dir") + "/driver/chromedriver_114";
       System.setProperty("webdriver.chrome.driver", pathDriver);
