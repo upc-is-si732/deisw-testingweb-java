@@ -191,6 +191,46 @@ Scenario Outline: eating
     |    20 |   5 |   15 |
 ```
 
+```Gherkin
+Feature: Learn data tableScenario outline: Cucumber Data Table
+  Given Table with example
+    | FirstName  | <FirstName>  |
+    | MiddleName | <MiddleName> |
+    | LastName   | <LastName>   |
+  Examples: 
+    | FirstName | MiddleName | LastName |
+    | Priyank   | B          | Shah     |
+    | Mansi     | P          | Shah     |
+```
+
+```Gherkin
+Scenario Outline: User tries to signup with improper combination of password
+  Given the user has browsed to the signup page
+  When the user tries to signup entering the following details
+    | email           |  william@xyz.com   |
+    | password        | <Password>         |
+    | confirmPassword | <ConfirmPassword>  |
+  Then an error message "<validation>" should be shown above the "password" field
+  Examples:
+    | Password    | ConfirmPassword  | validation                         |
+    | 234567569   | 234567569        | This password is entirely numeric  |
+    | 123456789   | 123456789        | This password is too common.       |
+    | abcde       | abcde            | This password is too short.        |
+```
+
+```Gherkin
+Feature: Login Test
+  Scenario Outline: Successful Login with Valid Credentials
+    Given User is on Home Page
+    When User Navigate to Login Page
+    And User enters "<username>" and "<password>"
+    Then Message displayed Login Successfully
+    Examples:
+      | Username | Password |
+      | Employee_1 | Welc@345 |
+      | Employee_2 | Test@542 |
+```
+
 ### Examples
 
 Un `Scenario Outline` debe contener una o más secciones `Examples` (o `Scenarios`). Estos steps se interpretan como una plantilla que nunca se ejecuta directamente. En su lugar, el `Scenario Outline` ejecuta una vez cada fila de la sección `Examples` (sin contar la primera fila de encabezado).
@@ -229,4 +269,65 @@ Given the following users exist:
   | Matt   | matt@cucumber.io   | @mattwynne      |
 ```
 
+```Gherkin
+Scenario: Correct non-zero number of books found by author
+  Given I have the following books in the store
+    | title                                | author      |
+    | The Devil in the White City          | Erik Larson |
+    | The Lion, the Witch and the Wardrobe | C.S. Lewis  |
+    | In the Garden of Beasts              | Erik Larson |
+  When I search for books by author Erik Larson
+  Then I find 2 books
+```
 
+```Gherkin
+Feature: Learn data tableScenario: Cucumber Data Table
+  Given Table with two rows and multiple columns
+    | columnA | columnB | columnC | columnD |
+    | value1  | value2  | value3  | value4  |
+    | value5  | value6  | value7  | value8  |
+  And Table with only two rows and two columns
+    | username | admin    |
+    | password | admin123 |
+  And Table with multiple rows and one column
+    | columnNameG |
+    | row1        |
+    | row2        |
+    | row3        |
+```
+
+```Gherkin
+Feature: New user registration.
+  Given I am on a new user registration page
+  When I enter valid data on the page
+    | Fields                 | Values              |
+    | First Name             | Tom                 |
+    | Last Name              | Kenny               |
+    | Email Address          | someone@someone.com |
+    | Re-enter Email Address | someone@someone.com |
+    | Password               | Password1           |
+    | Birthdate              | 01                  |
+  Then the user registration should be successful.
+```
+
+```Gherkin
+Scenario: login with valid credentials
+  Given a user has been created with the following details:
+    | email          | username  | password |
+    | user@email.com | user      | password |
+  And the user has browsed to the login page
+  When the user enters the following details in the login form:
+    | email          | username  | password |
+    | user@email.com | user      | password |
+  And the user logs in
+  Then the user should be redirected to the homepage
+```
+
+```Gherkin
+  Given the user has browsed to the signup page
+  When the user tries to signup entering the following details
+      | email           | william@xyz.com    |
+      | password        | 234567569          |
+      | confirmPassword | 234567569          |
+  Then an error message "This password is entirely numeric" should be shown above the "password" field
+```
